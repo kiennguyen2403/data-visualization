@@ -1,0 +1,215 @@
+.leaflet-container{
+  width:100%;
+  height:80vh;
+  justify-content:center;
+}
+
+
+.leaflet-interactive{
+  
+  animation-name:leaflet-interactive;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-direction: alternate;
+
+}
+@keyframes leaflet-interactive{
+  from{
+    opacity:1;
+  }
+
+  to {
+      opacity:0.3;
+  }
+}
+
+#container{
+  margin-bottom: 30px;
+}
+#graph_container{
+  background:white;
+  position:absolute;
+  z-index: 99999999999999;
+  height:80vh;
+}
+
+.leaflet-popup-tip{
+  opacity:0;
+}
+.App {
+  width:100vw;
+  background-color: #000000;
+  opacity:200;
+  border: 1px solid white;
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.button-forward svg { 
+
+  margin-left:3px;
+}
+
+#graph_title{
+  color:white;
+  z-index: 99999999999999;
+  text-align: center;
+}
+
+#navigation_bar{
+
+  width:100%;
+  height:10%;
+  color: white;
+  box-sizing: border-box;
+  background-color: white;
+  border-bottom:solid 0.1px gray;
+  
+  
+  }
+  
+  #navigation_bar ul{
+      list-style: none;
+      display:flex;
+      justify-content: space-around;
+      align-items: center;
+  }
+  
+  #tools{
+      display: flex;
+      justify-content: space-around;
+  }
+  
+  
+  #navigation_bar li{
+      margin:20px;
+      font-size:15px;
+      font-family: 'Poppins', sans-serif;
+  }
+  
+  #navigation_bar a{
+      text-decoration:none;
+      color: black ;
+  }
+  
+  
+  #tools a:hover{
+  
+      background-color: darkgray;
+      color:white;
+      transition: 0.5s ease-in;
+  }
+  
+  #logo a{
+      font-size:30px;
+      font-weight: bold;
+  }
+
+  section{
+    font-family: 'Poppins', sans-serif;
+    text-align: justify;
+    margin:20px;
+ 
+  }
+  #title{
+    color:white;
+    background-image: url("./resource/new-welcome02.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    margin:0px;
+    text-align: center;
+    height:100vh;
+  }
+
+  #title h1{
+    justify-content:center;
+    padding-top:200px;
+    font-size:80px
+  }
+
+  footer{
+    margin-top:120px;
+    margin-bottom:0px;
+    bottom:0px;
+}
+
+#footer{
+margin-bottom:0px;
+margin-top:0px;
+height: 200px;
+border-top: solid 1px black;
+display:flex;
+align-items: center;
+list-style: none;
+text-align:center;
+color:white;
+background-color:black;
+font-family: 'Poppins', sans-serif;
+bottom:0;
+}
+
+footer ul{
+    list-style:none;
+}
+#logo_footer{
+    
+    margin-left: 100px;
+    font-size:20px;
+}
+#text_footer{
+    width:50%;
+    margin-top:20px;
+    display:flex;
+    justify-content: space-around;
+    margin-left:50%;
+    
+}
+
+#text_footer a{
+    color:white;
+
+}
+
+#Contact{
+  list-style: none;
+  text-align:left;
+  
+}
+#Contact a{
+  text-decoration: none;
+}
+.heading{
+ font-weight: bolder; 
+ margin-bottom: 10px;  
+}
+  
+#production{
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content: space-between;
+
+}
+#production #graph_container{
+  margin-left:20px;
+  position: relative;
+  width:120%;
+
+
+}
+#production #table_container{ 
+  width:25%;
+  
+}
+.line {
+  stroke-width: 2;
+  fill: none;
+}
+
+.graph_title{
+  font-size:30px;
+  font-family: 'Poppins', sans-serif;
+
+}
