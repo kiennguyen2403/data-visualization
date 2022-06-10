@@ -74,7 +74,7 @@ export default function Barchart(props)
      .append("text")
      .text("Energy consumptions of "+statename+" in different types of resources")
      .attr("class","graph_title")
-     .attr("x",200)
+     .attr("x",20)
      .attr("y",550)
      
      var yAxis = d3.axisLeft().ticks(7).scale(yScale); //create yAxis

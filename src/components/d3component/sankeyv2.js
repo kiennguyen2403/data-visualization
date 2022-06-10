@@ -106,27 +106,28 @@ node.append("rect")
   .style("opacity", 0.5)
   .on("mouseover", function(d){
     let thisName=d.target.id;
-    node.selectAll("rect")
+    node.selectAll("rect").transition().duration(500)
       .style("opacity", function (d) {
         return highlightNodes(d, thisName)
       })
 
-    d3.selectAll(".sankey-link")
+    d3.selectAll(".sankey-link").transition().duration(500)
       .style("opacity", function (l) {
         return l.source.name == thisName || l.target.name == thisName ? 1 : 0.3;
       })
 
-    node.selectAll("text")
+    node.selectAll("text").transition().duration(500)
       .style("opacity", function (d) {
+  
         return highlightNodes(d, thisName)
       })
   })
   .on("mouseout", function (d) {
-    d3.selectAll("rect").style("opacity", 0.5);
-    d3.selectAll(".sankey-link").style("opacity", 0.7);
-    d3.selectAll("text").style("opacity", 1);
+    d3.selectAll("rect").style("opacity", 0.5).transition().duration(500);
+    d3.selectAll(".sankey-link").style("opacity", 0.7).transition().duration(500);
+    d3.selectAll("text").style("opacity", 1).transition().duration(500);
   })
-  .transition().duration(1000)
+
 
 node.append("text")
   .attr("x", function (d) { 

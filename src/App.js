@@ -25,6 +25,7 @@ function App() {
               <li><Link to="/"> KA</Link></li>
             </div>
             <div id ="tools">
+            
               <li> <Link to="/">Consumption visualization</Link></li>
               <li> <Link to="/production">Production visualization</Link></li>
               <li> <Link to="/about">About us</Link></li>
@@ -34,6 +35,7 @@ function App() {
       </header>
       
       <Routes> 
+      <Route path="/datavisualization" element={<About/>}></Route>
         <Route path="/" element={<Map/>}></Route>
         <Route path="/production" element={<Production/>}></Route>
         <Route path="/about" element={<About/>}></Route>

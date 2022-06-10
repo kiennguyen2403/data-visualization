@@ -28,8 +28,6 @@ export default function Production() {
       
         },[])
         
-        console.log(time);
-        console.log(sankey[time]);
     return(
     <div>
       <Timeline Changetime={Changethetime} mode="production"></Timeline>
@@ -38,6 +36,7 @@ export default function Production() {
         <Customgraph charttype="sankey" dataset={sankey[time]}></Customgraph>
         </div>
         <div id="table_container">
+        <h1 className='graph_title'>Table of Services</h1>
         <DataGrid
         rows={tabledata}
         columns={columns}
@@ -46,17 +45,17 @@ export default function Production() {
         rowsPerPageOptions={[5]}
         onCellClick={(d,i)=>{
           let thisName=d.value;
-           d3.selectAll("rect")
+           d3.selectAll("rect").transition().duration(500)
           .style("opacity", function (d) {
        
             return highlightNodes(d, thisName)
           })
-          d3.selectAll(".sankey-link")
+          d3.selectAll(".sankey-link").transition().duration(500)
           .style("opacity", function (l) {
               return l.source.name == thisName || l.target.name == thisName ? 1 : 0.3;
           })
 
-          d3.selectAll("text")
+          d3.selectAll("text").transition().duration(500)
           .style("opacity", function (d) {
             return highlightNodes(d, thisName)
           })
@@ -66,9 +65,9 @@ export default function Production() {
 
         onCellDoubleClick={(d,i)=>{
 
-          d3.selectAll("rect").style("opacity", 0.5);
-          d3.selectAll(".sankey-link").style("opacity", 0.7);
-          d3.selectAll("text").style("opacity", 1);
+          d3.selectAll("rect").style("opacity", 0.5).transition().duration(500);
+          d3.selectAll(".sankey-link").style("opacity", 0.7).transition().duration(500);
+          d3.selectAll("text").style("opacity", 1).transition().duration(500);
           
 
         }}

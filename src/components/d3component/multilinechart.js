@@ -19,11 +19,10 @@ export default function MultilineChart (props){
   var circleRadiusHover = 6;
   const dataset=[];
   const keys = Object.keys(data[0]);
-  console.log(keys);
   keys.forEach((key)=>{
     if(key!="Time")
     {
-  dataset.push({
+    dataset.push({
       name:key,
       value:data.map(d=>{
         if (!isNaN(d[key]))
@@ -84,12 +83,14 @@ export default function MultilineChart (props){
       .append("g")
       .attr("class", "line-group")
       .attr("id",d=>{return d.name})
-      .on("mouseover", function(d, i) {
+      .on("mouseover", function(d, i) 
+      {
+   
         svg
           .append("text")
           .attr("class", "title-text")
           .attr("id",d)
-          .style("fill", "grey")
+          .style("fill",color(dataset.map(d=>d.name).indexOf(i.name)))
           .text(this.id)
           .attr("text-anchor", "middle")
           .attr("x", 420)
@@ -109,16 +110,20 @@ export default function MultilineChart (props){
         d3.select(this)
           .style("opacity", lineOpacityHover)
           .style("stroke-width", lineStrokeHover)
-          .style("cursor", "pointer");
+          .style("cursor", "pointer")
+          .transition().duration(500);
       })
       .on("mouseout", function(d) {
         d3.selectAll(".line").style("opacity", lineOpacity);
         d3.selectAll(".circle").style("opacity", circleOpacity);
         d3.select(this)
           .style("stroke-width", lineStroke)
-          .style("cursor", "none");
+          .style("cursor", "none")
+          .transition().duration(500);;
       });
 
+
+   
     /* Add circles in the line */
     lines
       .selectAll("circle-group")
@@ -194,6 +199,19 @@ export default function MultilineChart (props){
     .attr("x",0)
     .attr("y",600)
 
+  console.log()
+  
+  var element= [...document.getElementsByClassName("line")]
+  element.forEach((e,i)=>{
+    d3.select(e)
+    .attr("stroke-dasharray", `${e.getTotalLength()},${e.getTotalLength()}`)
+    .attr("stroke-dashoffset", e.getTotalLength())
+    .transition()
+    .duration(1000)
+    .ease(d3.easeLinear)
+    .attr("stroke-dashoffset", 0);
+
+  })
      
   }, [dataset]); // Redraw chart if data changes
  

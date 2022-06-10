@@ -23,7 +23,6 @@ function MapConfigure({ center, zoom }) {
 export default function Map() 
 {
 
-    const timedata=[];
     const [center,setCenter] =useState([-24.6060639,96.358032]);
     const [scale ,setScale] =useState(4);
     const [time,setTime] =useState(0);
@@ -39,7 +38,7 @@ export default function Map()
         })
     }
     const Detailedgraph = (position) =>{
-        setCenter(position);
+        setCenter([position[0],position[1]-3]);
         setScale(6);
         Getlocationid(position)
     }
@@ -76,6 +75,7 @@ return(
         );
         })}
     </MapContainer>
+ 
 
 </div>
     

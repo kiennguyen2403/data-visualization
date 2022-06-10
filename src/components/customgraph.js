@@ -7,11 +7,11 @@ import Sankey from "./d3component/sankeyv2";
 
 
   const dimensions = {
-    width: 900,
+    width: 700,
     height: 500,
     margin: {
       top: 30,
-      right: 30,
+      right: 80,
       bottom: 30,
       left: 60
     }

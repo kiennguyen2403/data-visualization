@@ -12,7 +12,7 @@
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   animation-direction: alternate;
-
+  transition: all 0.5s ease-in-out;
 }
 @keyframes leaflet-interactive{
   from{
@@ -209,7 +209,10 @@ footer ul{
 }
 
 .graph_title{
-  font-size:30px;
+  font-size:20px;
   font-family: 'Poppins', sans-serif;
-
+  
+}
+.sankey-link{
+  transition: all 0.5s ease;
 }
