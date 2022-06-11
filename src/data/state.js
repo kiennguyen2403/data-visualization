@@ -1,3 +1,4 @@
+//data of each data
 export const Statedata= 
 [   
     {

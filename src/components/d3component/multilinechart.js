@@ -2,6 +2,8 @@ import React from "react";
 import * as d3 from "d3";
  
 export default function MultilineChart (props){
+  
+  //assign required variables
   const {data, dimensions}=props;
   const svgRef = React.useRef(null);
   const { width, height, margin } = dimensions;
@@ -11,7 +13,7 @@ export default function MultilineChart (props){
   var lineOpacity = "0.25";
   var lineOpacityHover = "0.85";
   var otherLinesOpacityHover = "0.1";
-  var lineStroke = "1.5px";
+  var lineStroke = "2px";
   var lineStrokeHover = "2.5px";
   var circleOpacity = "0.85";
   var circleOpacityOnLineHover = "0.25";
@@ -19,8 +21,10 @@ export default function MultilineChart (props){
   var circleRadiusHover = 6;
   const dataset=[];
   const keys = Object.keys(data[0]);
+
+  //push data to the dataset
   keys.forEach((key)=>{
-    if(key!="Time")
+    if(key=="Solar energy" || key=="Natural gas"  || key=="Liquid/gas biofuels" || key=="Town gas") 
     {
     dataset.push({
       name:key,
@@ -37,11 +41,14 @@ export default function MultilineChart (props){
     })
     }
   })  
-  
+  console.log(dataset)
+
   dataset.forEach(d=>{
     d.value= d.value.filter((d,i)=>i%5==0)
   })
- 
+
+  
+  //convert string to time layout
   var parseDate = d3.timeParse("%Y");
   dataset.forEach(function(d) {
     d.value.forEach(function(d) {
@@ -50,16 +57,18 @@ export default function MultilineChart (props){
     });
   });
  
+  //rerender when the dataset changes
   React.useEffect(() => 
   {
+
+    //scale data
     const xScale = d3.scaleTime()
       .domain(d3.extent(dataset[dataset.length-1].value, (d) => d.year))
       .range([0, width]);
 
 
     const yScale = d3.scaleLinear()
-      .domain([0,d3.max(dataset[dataset.length-1].value, (d) => d.consumption)
-      ])
+      .domain([0,1300])
       .range([height, 0]);
     // Create root container where we will append all other chart elements
     const svgEl = d3.select(svgRef.current).attr("id","graph_container");
@@ -85,7 +94,6 @@ export default function MultilineChart (props){
       .attr("id",d=>{return d.name})
       .on("mouseover", function(d, i) 
       {
-   
         svg
           .append("text")
           .attr("class", "title-text")
@@ -93,8 +101,9 @@ export default function MultilineChart (props){
           .style("fill",color(dataset.map(d=>d.name).indexOf(i.name)))
           .text(this.id)
           .attr("text-anchor", "middle")
-          .attr("x", 420)
-          .attr("y", 5);
+          .attr("x", 350)
+          .attr("y", 5)
+          .transition().duration(500);
       })
       .on("mouseout", function(d) {
         svg.select(".title-text").remove();
@@ -105,13 +114,15 @@ export default function MultilineChart (props){
       .style("stroke", (d, i) => color(i))
       .style("opacity", lineOpacity)
       .on("mouseover", function(d) {
+
+        //highlight the line when hover
         d3.selectAll(".line").style("opacity", otherLinesOpacityHover);
         d3.selectAll(".circle").style("opacity", circleOpacityOnLineHover);
         d3.select(this)
           .style("opacity", lineOpacityHover)
           .style("stroke-width", lineStrokeHover)
           .style("cursor", "pointer")
-          .transition().duration(500);
+          .transition().duration(200);
       })
       .on("mouseout", function(d) {
         d3.selectAll(".line").style("opacity", lineOpacity);
@@ -119,7 +130,7 @@ export default function MultilineChart (props){
         d3.select(this)
           .style("stroke-width", lineStroke)
           .style("cursor", "none")
-          .transition().duration(500);;
+          .transition().duration(200);;
       });
 
 
@@ -138,9 +149,11 @@ export default function MultilineChart (props){
       .append("g")
       .attr("class", "circle")
       .on("mouseover", function(d) {
+        //append the data into circles
         d3.select(this)
           .style("cursor", "pointer")
           .append("text")
+          .transition().duration(200)
           .attr("class", "text")
           .text(d=>d.consumption)
           .attr("x", d => xScale(d.year) + 5)
@@ -151,6 +164,7 @@ export default function MultilineChart (props){
           .transition()
           .duration(duration)
           .selectAll(".text")
+          .transition().duration(200)
           .remove();
       })
       .append("circle")
@@ -159,6 +173,7 @@ export default function MultilineChart (props){
       .attr("r", circleRadius)
       .style("opacity", circleOpacity)
       .on("mouseover", function(d) {
+        //highlight the nodes
         d3.select(this)
           .transition()
           .duration(duration)
@@ -189,18 +204,21 @@ export default function MultilineChart (props){
       .attr("y", 15)
       .attr("transform", "rotate(-90)")
       .attr("fill", "#000")
-      .text("Total values");
+      .text("Total consumtion");
 
-
-    svg
-    .append("text")
-    .text("Total energy consumptions of different materials in Australia")
-    .attr("class","graph_title")
-    .attr("x",0)
-    .attr("y",600)
-
-  console.log()
-  
+    
+    //append the legend into the bottom of the graph
+    dataset.forEach((d,i)=>{
+      svg
+      .append("text")
+      .text(d.name)
+      .attr("x",30+i%10*150)
+      .attr("font-size",15)
+      .attr("y",500)
+      .attr("fill", color(i))
+    })
+    
+  // line animation
   var element= [...document.getElementsByClassName("line")]
   element.forEach((e,i)=>{
     d3.select(e)

@@ -5,18 +5,15 @@ import { Statedata } from "../data/state";
 import { sankeydata as sankey} from '../data/data_sankey';
 
 
-
+//Timeline
 export default class Timeline extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       curIdx: 0,
-      prevIdx: -1
+      prevIdx: -1  //assign the default current index and previous index
     };
   }
-
-  
-
   render() 
   {
     
@@ -24,6 +21,8 @@ export default class Timeline extends React.Component {
   
     ];
    
+
+  //use the data in the consumption page if it is in the consumption page
   if (this.props.mode=="consumption")
   {
     Statedata.forEach((data,i)=>{
@@ -32,6 +31,7 @@ export default class Timeline extends React.Component {
       })
     })
   }
+  //use the data in the production page if it is in the production page
   else if (this.props.mode =="production")
   {
     sankey.forEach(d=>{
@@ -39,8 +39,7 @@ export default class Timeline extends React.Component {
     })
   }
 
-
-
+    //assign the required values
     const { curIdx, prevIdx } = this.state;
     const curStatus = EXAMPLE[curIdx].statusB;
     const prevStatus = prevIdx >= 0 ? EXAMPLE[prevIdx].statusB : "";

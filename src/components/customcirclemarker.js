@@ -2,6 +2,8 @@ import {React} from "react";
 import {CircleMarker} from "react-leaflet";
 import PropTypes from 'prop-types';
 
+
+//circle marker for the map 
 export default function Customcirclemarker(props){
     const {position, totalusage, Detailgraph} = props;
         const radius = totalusage/1000;
@@ -83,7 +85,7 @@ export default function Customcirclemarker(props){
    
 }
 
-
+//assign the types of the props
 Customcirclemarker.propTypes = {
     position: PropTypes.array.isRequired,
     totalusage: PropTypes.number.isRequired,

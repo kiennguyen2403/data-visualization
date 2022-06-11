@@ -1,5 +1,6 @@
+//data of consumption in whole Australia
+
 export const Australiatotal=[
-  
   {
     "Time": "1960-61",
     "Black coal": 495.3,

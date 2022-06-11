@@ -2,6 +2,8 @@ import React,{useEffect, useRef,useState} from "react";
 import * as d3 from "d3";
 import {sankeyCircular,addCircularPathData,sankeyJustify} from "./d3-sankey-circular"
 
+
+// declare and export the function so that it can be used in the production page
 export function highlightNodes (node, name){
   let opacity = 0.3
 
@@ -52,8 +54,8 @@ var sankey = sankeyCircular()
   svg
   .append("text")
   .text("The links between different energy production resources")
-  .attr("x",50)
-  .attr("y",0)
+  .attr("x",90)
+  .attr("y",-20)
   .attr("class","graph_title")
 var g = svg.append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
@@ -99,6 +101,7 @@ node.append("rect")
     return d.x1 - d.x0; 
   })
   .attr("id",(d)=>d.name)
+  .attr("class","sankeyrect")
   .style("fill", function (d) { 
   
     return nodeColour(d.x0); 
@@ -108,6 +111,7 @@ node.append("rect")
     let thisName=d.target.id;
     node.selectAll("rect").transition().duration(500)
       .style("opacity", function (d) {
+        console.log(d.name)
         return highlightNodes(d, thisName)
       })
 
@@ -136,6 +140,7 @@ node.append("text")
   })
   .attr("dy", "0.35em")
   .attr("text-anchor", "middle")
+  .attr("class","rectdes")
   .text(function (d) { 
     return d.name; 
   });

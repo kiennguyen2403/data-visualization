@@ -1,5 +1,5 @@
 // http://www.cleanenergyregulator.gov.au/RET/Forms-and-resources/Postcode-data-for-small-scale-installations
-
+//data for the snakey diagram
 export const sankeydata =
 [ 
 {   year:"2015",

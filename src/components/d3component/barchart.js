@@ -4,37 +4,39 @@ import * as d3 from "d3";
 
 export default function Barchart(props) 
 {
+    //assign the required dataset
     const {data, dimensions,statename} = props;
-    console.log(data)
     const dataset=[];
-    for (let i in data) {
-
-   
+    //push the object into the dataset
+    for (let i in data) 
+    {
       if (typeof data[i]=="number")
       {
       dataset.push({name:i,value:data[i]});
       }
     }
   
+
+ 
     const svgRef = React.useRef(null);
     const { width, height, margin } = dimensions;
-    const svgWidth = width + margin.left + margin.right;
-    const svgHeight = height + margin.top + margin.bottom;
+    const svgWidth = width + margin.left + margin.right+30;
+    const svgHeight = height + margin.top + margin.bottom+100;
 
-    
-
+      
+    //rerender when the dataset changes
     React.useEffect(()=>
     {
         const xScale = d3.scaleBand().domain(d3.range(dataset.length)).range([0,width]).paddingInner(0.3);
         
-        const yScale = d3.scaleLinear().domain([d3.max(dataset,function(d){return d.value}),d3.min(dataset,function(d){return d.value})]).range([margin.bottom,height-margin.top])
+        const yScale = d3.scaleLinear().domain([0,d3.max(dataset,function(d){return d.value})]).range([height,margin.bottom])
     
          // Create root container where we will append all other chart elements
         const svgEl = d3.select(svgRef.current).attr("id","graph_container");;
         svgEl.selectAll("*").remove(); // Clear svg content before adding new elements 
         const svg = svgEl
         .append("g")
-        .attr("transform", `translate(${margin.left},${margin.top+100})`);
+        .attr("transform", `translate(${margin.left},${margin.top+40})`);
    // Add X grid lines with labels
    const xAxis = d3.axisBottom(xScale)
      .ticks(5)
@@ -50,37 +52,52 @@ export default function Barchart(props)
     .attr("opacity", 0.5)
     .attr("color", "black")
     .attr("width","10px")
-    .attr("font-size", "0.75rem");
+    .attr("font-size", xScale.bandwidth()/7.5);
    // Add Y grid lines with labels
      svg.selectAll("rect")
      .data(dataset)
      .enter()
      .append("rect")
-     .transition().duration(1000).ease(d3.easeElasticOut)
      .attr("x", function(d, i){
          return xScale(i);
      })
      .attr("y", function(d){
-         return +(height - yScale(d.value) - 60);
+         return +(yScale(d.value) - 55);
      })
      .attr("width", Math.floor(xScale.bandwidth()))
      .attr("height", function(d){
-         return (yScale(d.value));
+         return (height- yScale(d.value));
      })
      .attr("fill", "darkslateblue")
+     .on("mouseover", function(i,d){ 
+      d3.select(this).attr("fill","orange")
+      var xPosition = parseFloat(d3.select(this).attr("x"));
+      var yPosition = parseFloat(d3.select(this).attr("y"));
+      svg.append("text").attr("id","tooltip").attr("x",xPosition+Math.floor(xScale.bandwidth()/2-13)).attr("y",yPosition-10).text(d.value).attr("font-size","13px");
+      })
+      .on("mouseout", function(event,d){ 
+        d3.select(this).attr("fill","darkslateblue");
+        svg.select("#tooltip").remove().transition()
+     .duration(500)
+    })
+     .transition().duration(500).ease(d3.easeElasticOut)
      ;
+     // Draw the bar chart
  
+
+     //append the graph title
      svg
      .append("text")
      .text("Energy consumptions of "+statename+" in different types of resources")
      .attr("class","graph_title")
-     .attr("x",20)
-     .attr("y",550)
+     .attr("x",0)
+     .attr("y",500)
      
      var yAxis = d3.axisLeft().ticks(7).scale(yScale); //create yAxis
-     svg.append("g").attr("transform", "translate("+(-10)+",-30)").call(yAxis);
+     svg.append("g").attr("transform", "translate(-10,-56)").call(yAxis); //append it to the yAxis
      
     }, [dataset]);
+    
 
     return <svg ref={svgRef} width={svgWidth} height={svgHeight} />;
 }

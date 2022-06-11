@@ -1,43 +1,40 @@
 import React, {useState,useEffect} from 'react';
 import MultilineChart from "./d3component/multilinechart.js";
 import Barchart from "./d3component/barchart.js";
-import Scatterplot from "./d3component/scatterplot.js";
+
 import Sankey from "./d3component/sankeyv2";
 
 
 
-  const dimensions = {
-    width: 700,
-    height: 500,
-    margin: {
-      top: 30,
-      right: 80,
-      bottom: 30,
-      left: 60
-    }
-  };
-
+  
 
 export default function Customgraph(props) {
   
-
+//assing the required sizes of the chart
   const {charttype,dataset,extrainformation} = props;
+  const dimensions = {
+    width: 700*0.9,
+    height: 500*0.9,
+    margin: {
+      top: 30*0.9,
+      right: 80*0.9,
+      bottom: 50*0.9,
+      left: 60*0.9
+    }
+  };
 
- 
+ //return suitable graph that fit with the string
 if (charttype === "linechart")
 {
 return(
         <MultilineChart
         data={dataset}
-        dimensions={dimensions}
-      
-      />
+        dimensions={dimensions}/>
 )
 
 }
 else if (charttype ==="barchart")
 {
-
   return(
       <Barchart
         data={dataset}
@@ -46,19 +43,7 @@ else if (charttype ==="barchart")
       />
   )
 }
-else if (charttype ==="scatterplot")
-{
-  return(
 
-    <div>
-      <Scatterplot
-      data={dataset}
-      dimensions={dimensions}
-      />
-    
-    </div>
-  )
-}
 else if (charttype=="sankey")
 {
   return (
@@ -67,8 +52,5 @@ else if (charttype=="sankey")
     </div>
   )
 }
-
-
-
 
 }

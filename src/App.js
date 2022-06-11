@@ -35,14 +35,13 @@ function App() {
       </header>
       
       <Routes> 
-      <Route path="/datavisualization" element={<About/>}></Route>
+      <Route path="/datavisualization" element={<About/>}></Route>  
         <Route path="/" element={<Map/>}></Route>
         <Route path="/production" element={<Production/>}></Route>
         <Route path="/about" element={<About/>}></Route>
       </Routes>
 
     </Router>
-
     <ul id="footer">
         <div id="logo_footer">
         <li> 

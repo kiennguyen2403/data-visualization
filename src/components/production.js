@@ -7,11 +7,13 @@ import Timeline from './timebar';
 import * as d3 from "d3";
 
 export default function Production() {
+
+  //assign the table layout
     const columns = [
         { field: 'production', headerName: 'Production Type', width: 200 },
       
       ];
-        
+        //assign the required value
         const [tabledata, setTableData] = useState({id:1,production:"Value"});
         const [time,setTime] =useState(0)
         const Changethetime = (index) =>
@@ -19,6 +21,8 @@ export default function Production() {
             setTime(index);
            
         }
+
+        //change when the data change
         useEffect(()=>{
           var value= [];
           sankey[time].nodes.forEach((node,i)=>{
@@ -27,16 +31,19 @@ export default function Production() {
           setTableData(value);
       
         },[])
-        
+    
+
+    
     return(
     <div>
+       
       <Timeline Changetime={Changethetime} mode="production"></Timeline>
        <div id="production"> 
         <div id="sankey_container"> 
         <Customgraph charttype="sankey" dataset={sankey[time]}></Customgraph>
         </div>
         <div id="table_container">
-        <h1 className='graph_title'>Table of Services</h1>
+        <h1 className='graph_title'>Table of Categories</h1>
         <DataGrid
         rows={tabledata}
         columns={columns}
@@ -44,39 +51,35 @@ export default function Production() {
         hideFooterSelectedRowCount
         rowsPerPageOptions={[5]}
         onCellClick={(d,i)=>{
+        
+          //change the sankey data if onclicked
+  
           let thisName=d.value;
-           d3.selectAll("rect").transition().duration(500)
-          .style("opacity", function (d) {
-       
+           d3.selectAll(".sankeyrect").transition().duration(500)
+          .style("opacity",function(d,i){
+            console.log(d.name)
             return highlightNodes(d, thisName)
           })
           d3.selectAll(".sankey-link").transition().duration(500)
           .style("opacity", function (l) {
               return l.source.name == thisName || l.target.name == thisName ? 1 : 0.3;
           })
-
-          d3.selectAll("text").transition().duration(500)
-          .style("opacity", function (d) {
+          d3.selectAll(".rectdes").transition().duration(500)
+          .style("opacity",(function (d,i) {
             return highlightNodes(d, thisName)
-          })
-            
+          }))
           }}
-        
-
         onCellDoubleClick={(d,i)=>{
-
+          //Return the to the default setting
           d3.selectAll("rect").style("opacity", 0.5).transition().duration(500);
           d3.selectAll(".sankey-link").style("opacity", 0.7).transition().duration(500);
           d3.selectAll("text").style("opacity", 1).transition().duration(500);
-          
-
         }}
-        
       />
-      
         </div>
 
     </div>
+  
     </div>
 );
 

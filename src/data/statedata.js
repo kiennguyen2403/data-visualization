@@ -125,7 +125,7 @@ var statesData = {
 
 
 
-  
+  //data for geojson
 
   export {statesData};
 
