@@ -1,6 +1,8 @@
 import React from "react";
 import * as d3 from "d3";
  
+
+//inspired by https://codesandbox.io/s/d3react-multiline-chart-version-3-animation-o5y57?file=/src/views/MultilineChart/MultilineChart.js
 export default function MultilineChart (props){
   
   //assign required variables
@@ -24,7 +26,7 @@ export default function MultilineChart (props){
 
   //push data to the dataset
   keys.forEach((key)=>{
-    if(key=="Solar energy" || key=="Natural gas"  || key=="Liquid/gas biofuels" || key=="Town gas") 
+    if(key!="Time") 
     {
     dataset.push({
       name:key,
@@ -56,7 +58,7 @@ export default function MultilineChart (props){
       d.consumption = +d.consumption;
     });
   });
- 
+  
   //rerender when the dataset changes
   React.useEffect(() => 
   {
@@ -68,7 +70,7 @@ export default function MultilineChart (props){
 
 
     const yScale = d3.scaleLinear()
-      .domain([0,1300])
+      .domain([0,d3.max(dataset[0].value,function(d){return d.consumption})])
       .range([height, 0]);
     // Create root container where we will append all other chart elements
     const svgEl = d3.select(svgRef.current).attr("id","graph_container");
@@ -99,9 +101,9 @@ export default function MultilineChart (props){
           .attr("class", "title-text")
           .attr("id",d)
           .style("fill",color(dataset.map(d=>d.name).indexOf(i.name)))
-          .text(this.id)
+          .text(this.id+" resources")
           .attr("text-anchor", "middle")
-          .attr("x", 350)
+          .attr("x", 340)
           .attr("y", 5)
           .transition().duration(500);
       })
@@ -211,8 +213,8 @@ export default function MultilineChart (props){
     dataset.forEach((d,i)=>{
       svg
       .append("text")
-      .text(d.name)
-      .attr("x",30+i%10*150)
+      .text(d.name+" resources")
+      .attr("x",200+i%10*150)
       .attr("font-size",15)
       .attr("y",500)
       .attr("fill", color(i))

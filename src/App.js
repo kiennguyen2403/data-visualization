@@ -1,6 +1,5 @@
 
 import {React} from 'react';
-
 import Map from './components/map';
 import About from './components/aboutpage';
 import Production from './components/production';
@@ -11,18 +10,15 @@ import "./App.css";
 
 
 function App() {
-  
-  
   return (
-    
-
+  
     <div  id ="App">
     <Router basename="/">
       <header id="navigation_bar">
         <nav>
           <ul>
             <div id="logo">
-              <li><Link to="/"> KA</Link></li>
+              <li><Link to="/"> Energeta</Link></li>
             </div>
             <div id ="tools">
             
@@ -45,7 +41,7 @@ function App() {
     <ul id="footer">
         <div id="logo_footer">
         <li> 
-        KN
+        Energeta
         </li>
         </div>
         <div id="text_footer">

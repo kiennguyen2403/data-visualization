@@ -53,7 +53,7 @@ var sankey = sankeyCircular()
 
   svg
   .append("text")
-  .text("The links between different energy production resources")
+  .text("Relationships between different energy production resources")
   .attr("x",90)
   .attr("y",-20)
   .attr("class","graph_title")

@@ -10,7 +10,7 @@ export default function Barchart(props)
     //push the object into the dataset
     for (let i in data) 
     {
-      if (typeof data[i]=="number")
+      if (typeof data[i]=="number" && data[i]!=0)
       {
       dataset.push({name:i,value:data[i]});
       }
@@ -27,7 +27,7 @@ export default function Barchart(props)
     //rerender when the dataset changes
     React.useEffect(()=>
     {
-        const xScale = d3.scaleBand().domain(d3.range(dataset.length)).range([0,width]).paddingInner(0.3);
+        const xScale = d3.scaleBand().domain(d3.range(dataset.length)).range([0,width+50]).paddingInner(0.35);
         
         const yScale = d3.scaleLinear().domain([0,d3.max(dataset,function(d){return d.value})]).range([height,margin.bottom])
     
@@ -51,8 +51,7 @@ export default function Barchart(props)
     .text(function(d) {return d.name})
     .attr("opacity", 0.5)
     .attr("color", "black")
-    .attr("width","10px")
-    .attr("font-size", xScale.bandwidth()/7.5);
+    .attr("font-size", xScale.bandwidth()/7.5+2);
    // Add Y grid lines with labels
      svg.selectAll("rect")
      .data(dataset)
@@ -88,7 +87,7 @@ export default function Barchart(props)
      //append the graph title
      svg
      .append("text")
-     .text("Energy consumptions of "+statename+" in different types of resources")
+     .text("Energy consumptions of "+statename+" by different resources")
      .attr("class","graph_title")
      .attr("x",0)
      .attr("y",500)

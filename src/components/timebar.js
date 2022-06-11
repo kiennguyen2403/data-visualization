@@ -1,6 +1,5 @@
 import React from "react";
 import HorizontalTimeline from "react-horizontal-timeline";
-import { Australiatotal } from "../data/Australiaconsumption";
 import { Statedata } from "../data/state";
 import { sankeydata as sankey} from '../data/data_sankey';
 

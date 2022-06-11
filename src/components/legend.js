@@ -8,10 +8,10 @@ export function Legend({ map }) {
     const getColor=(d) => 
     { 
       return d >= 60000
-        ? "red"
+        ? "#940d0d"
         : d > 40000
-        ? "orange"
-        : "yellow"
+        ? "#d16213"
+        : "#b59514"
     }
 
     //change if the map changed

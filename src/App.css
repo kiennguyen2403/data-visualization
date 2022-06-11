@@ -25,7 +25,7 @@
 }
 
 #container{
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 #graph_container{
   background:white;
@@ -209,7 +209,7 @@ footer ul{
 }
 
 .graph_title{
-  font-size:20px;
+  font-size:22px;
   font-family: 'Poppins', sans-serif;
   text-align: center;
   
@@ -243,4 +243,18 @@ footer ul{
   float: left;
   margin-right: 8px;
   opacity: 0.7;
+}
+
+.context{
+  margin-top:80px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.subtitle{
+  margin-left: 50px;
+  font-style: italic;
+  font-size:10px;
+  margin-bottom:10px;
+  margin-top:10px;
 }

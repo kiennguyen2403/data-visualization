@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 //circle marker for the map 
 export default function Customcirclemarker(props){
     const {position, totalusage, Detailgraph} = props;
-        const radius = totalusage/1000;
+        const radius = totalusage/1500;
         
 
         if (totalusage >=60000)
@@ -15,7 +15,7 @@ export default function Customcirclemarker(props){
 
             <CircleMarker
                 center={position}
-                pathOptions={{color: "red"}}
+                pathOptions={{color: "#940d0d"}}
                 radius={radius}
                 eventHandlers={{
                     click: () => {
@@ -40,7 +40,7 @@ export default function Customcirclemarker(props){
             return (
                 <CircleMarker   
                 center={position}
-                pathOptions={{color: "orange"}}
+                pathOptions={{color: "#d16213"}}
                 radius={radius}
                 eventHandlers={{
                     click: () => {
@@ -64,7 +64,7 @@ export default function Customcirclemarker(props){
         {
             return(
                 <CircleMarker  center={position}
-                pathOptions={{color: "yellow"}}
+                pathOptions={{color: "#b59514"}}
                 radius={radius}
                 eventHandlers={{
                     click: () => {
