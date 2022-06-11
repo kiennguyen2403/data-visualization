@@ -43,7 +43,7 @@ export default function Production() {
         <Customgraph charttype="sankey" dataset={sankey[time]}></Customgraph>
         </div>
         <div id="table_container">
-        <h1 className='graph_title'>List of categories</h1>
+        <p className='graph_title'>List of categories</p>
         <DataGrid
         rows={tabledata}
         columns={columns}
@@ -77,8 +77,6 @@ export default function Production() {
         }}
       />
         </div>
-        <p className="subtitle">Further information is available in the Department of Industry, Innovation, and Science.
-</p>
     </div>
     <div className="context">
   <p>The total amount of primary energy produced in the Australian economy, measured before consumption or transformation, is referred to as energy production. Primary energy sources are renewable energy sources that provide electricity without a thermal component, such as wind, hydro, and solar PV. Because the coal is previously accounted for when mined, coal-fired electricity generation is termed secondary energy output.
