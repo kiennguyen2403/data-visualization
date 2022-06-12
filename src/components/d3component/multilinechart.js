@@ -206,7 +206,7 @@ export default function MultilineChart (props){
       .attr("y", 15)
       .attr("transform", "rotate(-90)")
       .attr("fill", "#000")
-      .text("Total consumtion");
+      .text("Total consumtion (PJ)");
 
     
     //append the legend into the bottom of the graph

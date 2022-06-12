@@ -53,8 +53,8 @@ var sankey = sankeyCircular()
 
   svg
   .append("text")
-  .text("Relationships between different energy production resources")
-  .attr("x",90)
+  .text("Flow of energy production from 2015 to 2019")
+  .attr("x",220)
   .attr("y",-20)
   .attr("class","graph_title")
 var g = svg.append("g")

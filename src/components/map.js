@@ -57,8 +57,16 @@ export default function Map()
         setScale(4);
     }
     const Changethetime = (index) =>
-    {
+    {   
+ 
+        if (index<Statedata[0].value.length)
+        {
         setTime(index);
+        }
+        else
+        { 
+        setTime(0)
+        }
        
     }
 // CircleMarker if the scale is equal or smaller than 4
@@ -84,7 +92,7 @@ return(
     </MapContainer>
     <p className="subtitle">Further information is available in the Department of Industry, Innovation, and Science.
 </p>
-    <h1 className="graph_title">Total energy consumption by different resources and of different states in Australia</h1>
+    <h1 className="graph_title headtitle">Total energy consumption by different resources and of different states in Australia</h1>
     <div className="context">
     <p>The total amount of energy consumed in the Australian economy is measured as energy consumption. It equals domestic production minus imports minus exports (and changes in stocks). To avoid double-counting, it includes energy consumed in energy conversion activities such as electricity generation and petroleum refining but excludes derived fuels produced domestically. It is also known as total net energy consumption and is equal to the total primary energy supply. 
 Following two years of decline, Australian energy consumption increased by 1% to 5,920 petajoules in 2014–15. Energy consumption in 2014–15 is similar to that of the previous two years. In 2014–15, the Australian economy grew by more than 2%, while the population grew by 1%.
@@ -120,7 +128,7 @@ else {
     <p>The total amount of energy consumed in the Australian economy is measured as energy consumption. It equals domestic production minus imports minus exports (and changes in stocks). To avoid double-counting, it includes energy consumed in energy conversion activities such as electricity generation and petroleum refining but excludes derived fuels produced domestically. It is also known as total net energy consumption and is equal to the total primary energy supply. 
 Following two years of decline, Australian energy consumption increased by 1% to 5,920 petajoules in 2014–15. Energy consumption in 2014–15 is similar to that of the previous two years. In 2014–15, the Australian economy grew by more than 2%, while the population grew by 1%.
 Energy productivity increased by 1% in 2014–15, as measured by the ratio of GDP to energy consumption. Between 2000–01 and 2014–15, energy productivity increased by 28%. Over the same period, GDP increased by 51%, energy consumption increased by 18%, and the population increased by 23%.
-Knowing that it is challenging to get the ideas of how the energy consumption has changed across years and regions, the data have been visualized on a map and graphs. The map below will show you the total energy consumed by Australia and guide you to the consumption of specific states or territories just by clicking on the bubble. The line chart and bar chart are used to visualize the consumption details by energy units.
+Knowing that it is challenging to get the ideas of how the energy consumption has changed across years and regions, the data have been visualized on a map and graphs. The map above will show you the total energy consumed by Australia and guide you to the consumption of specific states or territories just by clicking on the bubble. The line chart and bar chart are used to visualize the consumption details by energy units.
 </p>
 </div>
         </div>

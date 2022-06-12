@@ -249,6 +249,8 @@ footer ul{
   margin-top:80px;
   margin-left: 50px;
   margin-right: 50px;
+  margin-bottom:50px;
+  text-align: justify;
 }
 
 .subtitle{
@@ -258,3 +260,8 @@ footer ul{
   margin-bottom:10px;
   margin-top:10px;
 }
+.headtitle{
+  margin-top:40px;
+  font-size:30px
+}
+

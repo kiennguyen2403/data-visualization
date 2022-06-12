@@ -10,7 +10,7 @@ export default function Production() {
 
   //assign the table layout
     const columns = [
-        { field: 'production', headerName: 'Production Type', width: 200 },
+        { field: 'production', headerName: 'Production Type', width: 200, fontWeight:"bold"},
       
       ];
         //assign the required value
@@ -45,6 +45,7 @@ export default function Production() {
         <div id="table_container">
         <p className='graph_title'>List of categories</p>
         <DataGrid
+        sx={{'.MuiDataGrid-columnHeaderTitle':{fontWeight:"bold"}}}
         rows={tabledata}
         columns={columns}
         pageSize={12}

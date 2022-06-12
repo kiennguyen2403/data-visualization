@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 //circle marker for the map 
 export default function Customcirclemarker(props){
     const {position, totalusage, Detailgraph} = props;
-        const radius = totalusage/1500;
+        const radius = totalusage/2000;
         
 
         if (totalusage >=60000)

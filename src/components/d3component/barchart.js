@@ -10,7 +10,7 @@ export default function Barchart(props)
     //push the object into the dataset
     for (let i in data) 
     {
-      if (typeof data[i]=="number" && data[i]!=0)
+      if (typeof data[i]=="number" && data[i]!=0 && i!="Total energy consumption")
       {
       dataset.push({name:i,value:data[i]});
       }
@@ -51,7 +51,7 @@ export default function Barchart(props)
     .text(function(d) {return d.name})
     .attr("opacity", 0.5)
     .attr("color", "black")
-    .attr("font-size", xScale.bandwidth()/7.5+2);
+    .attr("font-size", xScale.bandwidth()/7.5+2.5);
    // Add Y grid lines with labels
      svg.selectAll("rect")
      .data(dataset)
@@ -72,7 +72,8 @@ export default function Barchart(props)
       d3.select(this).attr("fill","orange")
       var xPosition = parseFloat(d3.select(this).attr("x"));
       var yPosition = parseFloat(d3.select(this).attr("y"));
-      svg.append("text").attr("id","tooltip").attr("x",xPosition+Math.floor(xScale.bandwidth()/2-13)).attr("y",yPosition-10).text(d.value).attr("font-size","13px");
+      svg.append("text").attr("id","tooltip").attr("x",xPosition+Math.floor(xScale.bandwidth()/2-18)).attr("y",yPosition-10).text(d.value+" PJ").attr("font-size","13px").transition()
+      .duration(500);
       })
       .on("mouseout", function(event,d){ 
         d3.select(this).attr("fill","darkslateblue");
@@ -91,10 +92,15 @@ export default function Barchart(props)
      .attr("class","graph_title")
      .attr("x",0)
      .attr("y",500)
+
      
-     var yAxis = d3.axisLeft().ticks(7).scale(yScale); //create yAxis
+     
+     var yAxis = d3.axisLeft().tickFormat(function(d){return d+" PJ"}).ticks(7).scale(yScale); //create yAxis
+
+     
      svg.append("g").attr("transform", "translate(-10,-56)").call(yAxis); //append it to the yAxis
      
+    
     }, [dataset]);
     
 

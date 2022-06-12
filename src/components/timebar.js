@@ -64,7 +64,6 @@ export default class Timeline extends React.Component {
               const curIdx = this.state.curIdx;
               this.setState({ curIdx: index, prevIdx: curIdx });
               this.props.Changetime(index);
-    
             }}
             values={EXAMPLE.map((x) => x.data)}
           />
